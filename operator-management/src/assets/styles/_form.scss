@@ -1,0 +1,47 @@
+
+    
+.auth-form{
+    width: 100%;
+    margin-top: 2em;
+    .form-group {
+        padding: 0 5em;
+        width: 100%;
+        min-height: 200px;
+    }
+    .mat-form-field {
+        width: 100%;        
+    }
+    .mat-raised-button {
+        .mat-button-wrapper {
+            display: flex!important;
+            align-items: center!important;
+            justify-content: center!important;
+            span {
+                
+                margin: 0 5px!important;
+            }
+        }
+    }
+}
+.file-upload {
+    display: block;
+    height: 120px;
+    width: 170px;
+    max-width: 100%;
+  }
+  .form-section {
+    padding: 1em;
+    margin: 1em 0;
+  }
+  .mat-form-field-infix {
+    width: 120px!important;
+    padding: 0.5em 0 0.5em 0!important;
+}
+.mat-form-field-label-wrapper {
+    top: -1.3375em;
+}
+.tariff-container {
+    .mat-table {
+        max-height: 350px;
+    }
+}

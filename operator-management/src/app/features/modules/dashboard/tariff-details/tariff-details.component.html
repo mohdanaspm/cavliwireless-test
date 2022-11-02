@@ -1,0 +1,89 @@
+<div [formGroup]="form">
+    <div formArrayName="tariff" *ngFor="let entry of tarifArray.controls; let i = index;">
+        <div [formGroupName]="i">
+            <input matInput placeholder="Zone" required name="zone" formControlName="zone" [(ngModel)]="operator.zone"> 
+            <input matInput placeholder="Network Operator" required style="text-overflow: ellipsis;">
+          <input type="date" formControlName="to" placeholder="To date">
+        </div>
+      </div>
+<div  class="tariff-container" >
+    <mat-table [dataSource]="dataSource" formArrayName="tariff">
+        <ng-container> 
+        <ng-container matColumnDef="Zone">
+            <mat-header-cell *matHeaderCellDef>
+                Zone
+            </mat-header-cell>
+            <mat-cell *matCellDef="let operator; let rowIdx = index;" [formGroupName]="index">
+                <mat-form-field>
+                    
+                    <input matInput placeholder="Zone" required name="zone" formControlName="zone" [(ngModel)]="operator.zone"> 
+                    
+                    <!-- <mat-error *ngIf="zone?.invalid">
+                        <div *ngIf="zone.errors.required">Zone is required</div>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Country">
+            <mat-header-cell *matHeaderCellDef>
+                Country
+            </mat-header-cell>
+            <mat-cell *matCellDef="let operator; let rowIdx = index;" [formGroupName]="rowIdx">
+                <mat-form-field>
+                    
+                    <input matInput placeholder="Country" required>
+                    <!-- <mat-error *ngIf="country?.invalid">
+                        <div *ngIf="country.errors.required">Country is required</div>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Network Operator">
+            <mat-header-cell *matHeaderCellDef>
+                Network Operator
+            </mat-header-cell>
+            <mat-cell *matCellDef="let operator; let rowIdx = index;" [formGroupName]="rowIdx">
+                <mat-form-field>
+                    
+                    <input matInput placeholder="Network Operator" required style="text-overflow: ellipsis;">
+                    <!-- <mat-error *ngIf="network_operator?.invalid">
+                        <div *ngIf="network_operator.errors.required">Network operator is required</div>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Network Code">
+            <mat-header-cell *matHeaderCellDef>
+                Network code
+            </mat-header-cell>
+            <mat-cell *matCellDef="let operator; let rowIdx = index;" [formGroupName]="rowIdx">
+                <mat-form-field>
+                    
+                    <input matInput placeholder="Network Code" required style="text-overflow: ellipsis;">
+                    <!-- <mat-error *ngIf="network_code?.invalid">
+                        <div *ngIf="network_code.errors.required">Network Code is required</div>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Increment">
+            <mat-header-cell *matHeaderCellDef>
+                Increment
+            </mat-header-cell>
+            <mat-cell *matCellDef="let operator; let rowIdx = index;" [formGroupName]="rowIdx">
+                <mat-form-field>
+                    
+                    <input matInput placeholder="Increment" required style="text-overflow: ellipsis;">
+                    <!-- <mat-error *ngIf="increment?.invalid">
+                        <div *ngIf="increment.errors.required">Gender is required</div>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+    </ng-container>
+        <mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: objectKeys(columnHeader) let i = index;"></mat-row>
+    </mat-table>
+
+</div>
+</div>

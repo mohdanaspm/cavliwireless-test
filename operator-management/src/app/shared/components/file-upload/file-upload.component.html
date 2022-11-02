@@ -1,0 +1,19 @@
+
+    <label  class="drag-zone"
+    [appDragDrop]="dragDropEnabled"
+    (dropped)="handleFileDrop($event)">
+    <input
+    type="file"
+    [accept]="fileType"
+    [multiple]="multiple"
+    (change)="addFiles(fileInput.files)"
+    #fileInput
+    class="visually-hidden"
+  />
+  <div *ngIf="!uploadedItem;else other_content">
+    <ng-content></ng-content>
+</div>
+
+<ng-template #other_content><span title="{{uploadedItem[0]?.name}}" class="filename">{{uploadedItem[0]?.name}}</span>&nbsp;<mat-icon color="Primary" (click)="remove($event)">cancel</mat-icon></ng-template>
+  
+</label>

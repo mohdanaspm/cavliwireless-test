@@ -1,0 +1,41 @@
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container
+      [matColumnDef]="tableData"
+      *ngFor="let tableData of objectKeys(columnHeader)"
+    >
+      <ng-container [ngSwitch]="tableData">
+        <ng-container *ngSwitchDefault>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{columnHeader[tableData]}}
+          </th>
+          <td mat-cell *matCellDef="let element">{{element[tableData] }}</td>
+        </ng-container>
+  
+        <ng-container *ngSwitchCase="'actions'">
+          <th mat-header-cell *matHeaderCellDef>{{columnHeader[tableData]}}</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button type="button"
+              (click)="handleClick(row, 'delete')"
+              *ngIf="!row.hasOwnProperty('isDeletable') || row['isDeletable']"
+            >
+            <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+       <div style="text-align: center;">No data found</div> 
+      </td>
+    </tr>
+  
+    <tr mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
+    <tr mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
+  </table>
+  
+  <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+  

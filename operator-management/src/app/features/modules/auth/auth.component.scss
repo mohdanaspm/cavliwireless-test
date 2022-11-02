@@ -1,0 +1,10 @@
+.auth-container {
+    height: 100%;
+    .side-poster {
+        height: inherit;
+        background: url('../../../../assets/images/auth-bg.jpg');
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../../../assets/styles/media-queries';
+
+.main {
+    height: calc(100vh - 160px);
+    padding: 2em 20em;
+    overflow-y: auto;
+    @include layout-bp(lt-xl) {
+        padding: 2em 18em;
+    }
+    @include layout-bp(lt-lg) {
+        padding: 2em 15em;
+    }
+    @include layout-bp(lt-md) {
+        padding: 2em 6em;
+    }
+    @include layout-bp(lt-sm) {
+        padding: 2em;
+    }
+}

@@ -1,0 +1,17 @@
+.mat-table {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 1em;
+    &::-webkit-scrollbar {
+        width: 0.75em;
+    }
+     
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+     
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+    }
+}

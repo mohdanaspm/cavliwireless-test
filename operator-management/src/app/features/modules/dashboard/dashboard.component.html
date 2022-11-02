@@ -1,0 +1,64 @@
+<div class="dashboard-container">
+    <div class="form-container">
+        <form [formGroup]="operatorForm" (ngSubmit)="onSubmit()">
+            <div class="mat-elevation-z3 form-section">
+            <div class="form-group" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="form-control" fxFlex>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Network Operator Name</mat-label>
+                        <input type="text" matInput formControlName='network_operator' placeholder="Enter network operator name">
+                        <mat-error *ngIf="f['network_operator'].errors">
+                            Please enter an operator name
+                        </mat-error>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="zone-details">
+                <div class="form-group" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15" formGroupName="zone_details">
+                    <div class="form-control" fxFlex>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Zone</mat-label>
+                            <input type="text" matInput formControlName='zone_name' placeholder="Enter network operator zone">
+                            <mat-error *ngIf="f['zone_details'].get('zone_name').errors as zoneError">
+                                <span *ngIf="zoneError['duplicate']">duplicate zone </span>
+                                <span *ngIf="zoneError['required']">Please enter the zone</span>
+                            </mat-error>
+                          </mat-form-field>
+                          
+                    </div>
+                    <div class="form-control" fxFlex>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Price</mat-label>
+                            <input type="text" matInput formControlName='zone_price' placeholder="Enter price/MB" [ngModel]="price | number | currency:'USD' :true : '1.2-2'" (ngModelChange)="price = $event === '$0.00' ? '' : $event" ngModelOptions="{updateOn: 'blur'}">
+                            <mat-error *ngIf="f['zone_details'].get('zone_price').errors as priceError">
+                                <span *ngIf="priceError['required']">Please enter the price</span>
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                    <div fxFlex> <button type="button" mat-raised-button color="primary" (click)="addZone()" [disabled]="!operatorForm.controls['zone_details'].valid">Add</button></div>
+                </div>
+                <app-zone-list></app-zone-list>
+            </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="mat-elevation-z3 form-section">
+            <div fxLayout="row" fxLayoutAlign="start end" class="upload-block">
+                <app-file-upload [fileType]="'.xlsx'" class="file-upload" (filesChanged)="readFile($event)" (filesRemoved)="onFileRemove()">
+                    <div fxLayout="row" fxLayoutAlign="start end"><mat-icon>cloud_upload</mat-icon>&nbsp;Drag file to upload</div>
+                </app-file-upload>
+                <button mat-button color="primary"><mat-icon>cloud_download</mat-icon>&nbsp;<a href="../../../../assets/documents/Tariff_sheet.xlsx" download>Generate a sample sheet</a></button>
+            </div>
+            <div  fxLayout="row" fxLayoutAlign="end start">
+                <button type="button" mat-raised-button color="primary" (click)="addTariff()" [disabled]="tariffData.length===0">Add</button>
+            </div>
+            <div class="tariff-details" *ngIf="showTariff">
+                <app-tariff-details formArrayName="tariff" [tariff]="operatorForm.get('tariff')" [tableData]="tariffData"></app-tariff-details>
+            </div>
+            </div>
+            <div class="main-actions" fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="10">                
+                <button type="button" mat-raised-button color="warn" (click)="resetForm()">Cancel</button>
+                <button type="submit" mat-raised-button color="primary" [disabled]="isSaveDisabled()">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>

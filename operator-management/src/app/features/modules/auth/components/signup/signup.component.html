@@ -1,0 +1,35 @@
+<div class="login-container" fxLayout="column" fxLayoutAlign="space-between center" fxFill>
+    <h1>Sign Up</h1>
+    <div class="auth-form">
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()" fxLayout="column" fxLayoutAlign="space-between center">
+            <div class="form-group" fxLayout="column" fxLayoutAlign="start center">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName='email' placeholder="Ex. pat@example.com" [readonly]="isLoading">
+                    <mat-error *ngIf="f['email'].errors">
+                        Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName='password' placeholder="Enter your password here" [readonly]="isLoading">
+                    <mat-error *ngIf="f['password'].errors">
+                      Please enter valid password
+                    </mat-error>
+                  </mat-form-field>      
+                  <mat-error *ngIf="signupForm?.errors?.['apiError']">
+                    {{signupForm.errors?.['apiError']}}
+                  </mat-error>           
+            </div>
+            <div class="form-action" fxLayout="column" fxLayoutAlign="space-between center">
+                <button type="submit" mat-raised-button color="primary" fxLayout="row" [disabled]="isLoading">
+                  <span>Sign Up</span>                     
+                  <mat-progress-spinner *ngIf="isLoading"
+                  [color]="'primary'"
+                  [mode]="'indeterminate'" [diameter]="20">
+              </mat-progress-spinner></button>
+            <p>Have an account?<button type="button" mat-button color="primary" [routerLink]="['/auth', 'signin']" routerLinkActive="active" ariaCurrentWhenActive="page" [disabled]="isLoading">Sign in</button></p>
+            </div>            
+        </form>
+    </div>
+</div>
